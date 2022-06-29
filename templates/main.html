@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import form_field %}
+
+{% block content %}
+<h1>智能创作平台</h1>
+<div id="passage_block">
+
+{% if data %}
+<h2>{{ data['title'] }}</h2>
+<p>摘要: {{ data['abstract'] }}</p>
+{% endif %}
+
+<form method="post">
+    {{ passageForm.csrf_token }}
+    <p> </p>
+    {{ passageForm.context }}
+    <p> </p>
+    {{ passageForm.submit }}
+</form>
+
+</div>
+{% endblock %}

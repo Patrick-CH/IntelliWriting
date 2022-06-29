@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>实验室仪器设备管理系统</h1>
+<body>
+    <ul>
+<!--        <li><button onclick="window.location.href='{{ url_for('stuffList') }}'" class="list_btn"><a >职工列表</a></button></li>-->
+        <li><button onclick="window.location.href='{{ url_for('equipmentListAvailable') }}'" class="list_btn"> 在库设备管理</button></li>
+        <li><button onclick="window.location.href='{{ url_for('equipmentListOut') }}'" class="list_btn"> 已借出设备管理</button></li>
+        <li><button onclick="window.location.href='{{ url_for('equipmentAdd') }}'" class="list_btn"> 设备购入登记</button></li>
+        <li><button onclick="window.location.href='{{ url_for('equipmentInRecord') }}'" class="list_btn"> 设备购入记录查询</button></li>
+        <li><button onclick="window.location.href='{{ url_for('equipmentRemoveRecord') }}'" class="list_btn"> 设备报废记录查询</button></li>
+    </ul>
+</body>
+{% endblock %}
