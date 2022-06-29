@@ -15,8 +15,6 @@ import networkx as nx
 import numpy as np
 import sys
 
-from transformers import BertTokenizer
-
 HEAD_REINFORCE_RATE = 1.4
 TAIL_REINFORCE_RATE = 1.2
 
