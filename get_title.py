@@ -1,4 +1,5 @@
 # -*- encoding:utf-8 -*-
+from operator import le
 import re
 from ReinforcedTextRank.ReTextRankSeq import ReTextRankSeq
 
@@ -43,8 +44,8 @@ def get_title(content: str):
     rtrs = ReTextRankSeq()
     rtrs.analyze(text=content)
     sentences = rtrs.get_key_sentences()
-    if len(sentences[0].sentence) == 0:
-        print(sentences)
+    if len(sentences) == 0:
+        return ''
     title = sentences[0].sentence
     title = optimize(title)
 
