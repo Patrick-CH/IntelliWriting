@@ -8,7 +8,7 @@ IntelliWriting is an intelligent writing tool based on an improved version of Te
 
 ## Introduction
 
-Abstract: Title prediction has always been an important task in the field of NLP. According to the different characteristics of text, researchers and algorithm engineers have proposed a variety of algorithms to predict the title and abstract. Among them, [TextRank](https://aclanthology.org/W04-3252.pdf) , improved from Google's [PageRank](https://en.wikipedia.org/wiki/PageRank), is an important text summarization algorithm. In this project, TextRank is improved to a certain extent. Not only the summary calculation is realized, but also the title prediction is successfully achieved. The test results in the news data of learning Power reach 19.3% rouge-L effect.
+Title prediction has always been an important task in the field of NLP. According to the different characteristics of text, researchers and algorithm engineers have proposed a variety of algorithms to predict the title and abstract. Among them, [TextRank](https://aclanthology.org/W04-3252.pdf) , improved from Google's [PageRank](https://en.wikipedia.org/wiki/PageRank), is an important text summarization algorithm. In this project, TextRank is improved to a certain extent. Not only the summary calculation is realized, but also the title prediction is successfully achieved. The test results in the news data from [Xuexiqiangguo](https://www.xuexi.cn/) reach 19.3% rouge-L effect.
 
 ### Abstract
 
@@ -52,7 +52,19 @@ We use ReTextRank, an improvement of TextRank, to quickly calculate the headline
 
 
 
-## Requirements
+### Test
+
+We use the news data from [Xuexiqinagguo](https://www.xuexi.cn/)：
+
+| Test   | Rouge-1 | Rouge-2 | Rouge-L |
+| ------ | ------- | ------- | ------- |
+| result | 32.5    |         | 19.3    |
+
+
+
+## Install & Use
+
+### Requirements
 
 Our project supports Windows and Linux systems, but you must meet the following requirements:
 
@@ -64,16 +76,14 @@ Our project supports Windows and Linux systems, but you must meet the following 
 
 
 
-## Optional
+### Optional
 
 These two packages are not required if you do not need to run the test program test.py
 
 - Pandas
 - tqdm
 
-
-
-## Install & Use
+### Tutorial
 
 You can install our system by following steps：
 
