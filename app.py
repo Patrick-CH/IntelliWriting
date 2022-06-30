@@ -11,27 +11,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'secret string')
 
 
-def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc
-
-
-def redirect_back(default='hello', **kwargs):
-    """
-
-    :param default: 获取信息失败时的返回值
-    :param kwargs: 可选参数，作用同上
-    :return: 重定向到上一个界面，如过无法获取上一个界面则返回default
-    """
-    for target in request.args.get('next'), request.referrer:
-        if not target:
-            continue
-        if is_safe_url(target):
-            return redirect(target)
-    return redirect(url_for(default, **kwargs))
-
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
     form = PassageForm()
