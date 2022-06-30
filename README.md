@@ -57,8 +57,8 @@ We use ReTextRank, an improvement of TextRank, to quickly calculate the headline
 We use the news data from [Xuexiqinagguo](https://www.xuexi.cn/)：
 
 | Test   | Rouge-1 | Rouge-2 | Rouge-L |
-| ------ | ------- | ------- | ------- |
-| result | 32.5    |         | 19.3    |
+| ------ |---------|---------| ------- |
+| result | 32.2    | 20.3    | 19.3    |
 
 
 
