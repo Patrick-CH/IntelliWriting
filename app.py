@@ -44,5 +44,14 @@ def index():
     return render_template('main.html', passageForm=form)
 
 
+@app.route('/api/title', methods=['POST'])
+def api_title():
+    context = request.form['context']
+    title = get_title(context)
+    abstract = get_abstract(context)
+    data = {'title': title, 'abstract': abstract}
+    return data
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=9000)
