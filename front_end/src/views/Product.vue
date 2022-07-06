@@ -34,16 +34,21 @@
           </el-col> 
           <el-col :span="12">
             <h3 style="text-align:center">生成摘要</h3>
+            <template>
+              <div>
+                <vue-slider
+                  v-model="value"
+                  :min="1"
+                  :max="10"
+                  :default="6"
+                  :interval="1"
+                ></vue-slider>
+              </div>
+            </template>
             <div style="margin-top:10px;background-color: #ffffff;">
               <!-- 接受摘要内容 -->
               <p style="border: 1px solid;border-color:#dcdfe6;padding: 10px;height: 230px;border-radius: 4px;overflow: auto;margin-bottom:10px">
-                每个人都不可避免的一件事，就是走过青春，而青春是一个人一生之中几乎最灿烂的时光，青春的酣畅和肆意，便是往后的时光中回味，也是异常羡慕的，
-                而美好的时光总是短暂的，青春成了记忆中定格的美好，能够反复回忆却无法追寻。同样的，青春时光里会留下的，除了那些美好张扬，还有青涩和遗憾，
-                而这些有时候又影响了一个人的以后，那些未曾抓在手里过的，也是真正叫人念念不忘的。青春时代是一个短暂的美梦，当你醒来时，这早已消失得无影
-                无踪了。你瞧，青春就在懵懵懂懂里过去了，短暂的就像是一场梦，真的能够深刻意识到青春里的美好的时候，它如烟般消散，留下的只是一段鲜艳的记忆，
-                一张张熟悉的脸孔也不复旧日模样。只有这变化里，才能够找到些许残存的青春岁月。珍惜，是一件很难的事情，难的不是珍惜这件事，而是如何分辨正确
-                的方法。就像执行规则可能只是按部就班，但是制定规则却要考虑到方方面面，这其中的悖论就是很多事，没有办法求全，也就是说再如何完美的事，深究
-                起来总是会有遗憾。也许，有些事就如同青春一样，带着些许遗憾才算一场圆满。
+                {{abstract}}
               </p>
             </div>
             <h3 style="text-align:center">生成标题</h3>
@@ -56,28 +61,13 @@
               border-radius: 4px;
               overflow: auto">
                 <el-row style="margin-top:15px;">
-                  <!-- 接受摘要内容 -->
-                  <div style="width:400px; float: left">青春是一个短暂的美梦, 当你醒来时, 它早已消失无踪</div>
+                  <!-- 接受标题内容 -->
+                  <div style="width:400px; float: left" id="t1">{{ title1 }}</div>
                   <div style="float: left">
                     <el-link type="primary" style="margin-left:10px">复制</el-link>
                   </div>
                 </el-row>
                 <el-divider></el-divider>
-                <el-row style="margin-top:15px;">
-                  <!-- 接受摘要内容 -->
-                  <div style="width:400px; float: left">青春是一个美梦, 当你醒来时, 它早已消失无踪</div>
-                  <div style="float: left">
-                    <el-link type="primary" style="margin-left:10px">复制</el-link>
-                  </div>
-                </el-row>
-                <el-divider></el-divider>
-                <el-row style="margin-top:15px;">
-                  <!-- 接受摘要内容 -->
-                  <div style="width:400px; float: left">青春是一个短暂的美梦, 梦醒时分, 烟消云散</div>
-                  <div style="float: left">
-                    <el-link type="primary" style="margin-left:10px">复制</el-link>
-                  </div>
-                </el-row>
             </div>
           </el-col>
         </el-row>
@@ -87,11 +77,16 @@
 </template>
 
 <script>
-  import Banner from "../components/Banner"; 
+  import Banner from "../components/Banner";
+  import axios from "axios";
+  // import Vue from "vue";
   export default {
     data() {
       return {
-        textarea: ''
+        textarea: '',
+        title1: '', 
+        abstract: '',
+        value: 6
       };
     },
     components: {
@@ -103,6 +98,14 @@
           message: '文章内容已上传成功，请耐心等待哦！',
           type: 'success'
         });
+        var formData = new FormData();
+        formData.append('context', this.textarea);
+        formData.append('num_sentence', this.value);
+        axios.post("api/api/title", formData).then(({ data: res }) => {      
+          this.title1 = res.title;
+          this.abstract = res.abstract;
+        });
+        window.console.log(this.value);
       },
     }
   };

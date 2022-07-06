@@ -26,8 +26,9 @@ def index():
 @app.route('/api/title', methods=['POST'])
 def api_title():
     context = request.form['context']
+    num_sentence = int(request.form['num_sentence'])
     title = get_title(context)
-    abstract = get_abstract(context)
+    abstract = get_abstract(context, num_sentence)
     data = {'title': title, 'abstract': abstract}
     return data
 
