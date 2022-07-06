@@ -1,0 +1,8 @@
+flask==2.0.3
+flask-wtf==1.0.0
+pandas==1.4.2
+numpy==1.22.3 
+WTForms==3.0.1
+tqdm==4.46.0
+torch==1.11.0
+networkx==2.8.4
