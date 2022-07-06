@@ -1,5 +1,6 @@
 <template>
-  <div class="home" v-loading="loading">
+  <!-- <div class="home" v-loading="loading"> -->
+  <div class="home">
     <swiper id="swiperBox" v-bind:options="swiperOption" ref="mySwiper">
       <swiper-slide class="swiper-slide slide-one">
       </swiper-slide>
@@ -129,20 +130,20 @@ export default {
       return this.$refs.mySwiper.swiper;
     }
   },
-  mounted() {
-    this.$http
-      .all([
-        this.$http.get("Cases/GetCasesAll"),
-        this.$http.get(`News?type=1&num=3`)
-      ])
-      .then(
-        this.$http.spread((responseCases, responseNews) => {
-          this.caseList = responseCases.data;
-          this.newsList = responseNews.data;
-          this.loading = false;
-        })
-      );
-  }
+  // mounted() {
+  //   this.$http
+  //     .all([
+  //       this.$http.get("Cases/GetCasesAll"),
+  //       this.$http.get(`News?type=1&num=3`)
+  //     ])
+  //     .then(
+  //       this.$http.spread((responseCases, responseNews) => {
+  //         this.caseList = responseCases.data;
+  //         this.newsList = responseNews.data;
+  //         this.loading = false;
+  //       })
+  //     );
+  // }
 };
 </script>
  

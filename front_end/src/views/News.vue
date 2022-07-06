@@ -1,7 +1,8 @@
 <template>
   <div class="news">
     <banner title="精品时讯" />
-    <div class="news-section" v-loading="loading">
+    <!-- <div class="news-section" v-loading="loading"> -->
+    <div class="news-section">
       <div class="news-section-content">
         <div class="category">最新动态</div>
         <div class="content-nav-item">
