@@ -16,36 +16,59 @@ IntelliWriting 是一个基于改进版TextRank的智能写作工具，可以智
 
 项目结构
 
-```文件树
-├── app.py
-├── forms.py
-├── get_abstract.py
-├── get_title.py
+
+Project Structure
+
+```file tree
+.
+├── back_end
+│   ├── app.py
+│   ├── forms.py
+│   ├── get_abstract.py
+│   ├── get_title.py
+│   ├── ReinforcedTextRank
+│   ├── requirements.txt
+│   ├── start_service.sh
+│   ├── static
+│   ├── templates
+│   └── test.py
+├── front_end
+│   ├── babel.config.js
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   ├── README.md
+│   ├── src
+│   └── vue.config.js
+├── README.md
+├── README_ZH.md
 ├── ReinforcedTextRank
-│   ├── __init__.py
-│   ├── ReTextRankKeyword.py
-│   ├── ReTextRankSeq.py
-│   ├── Segmentation.py
-│   ├── stopwords.txt
-│   ├── tf-idf.json
-│   └── util.py
-└── test.py
+└── train
+    ├── app.py
+    ├── config
+    ├── data_helper.py
+    ├── data_set.py
+    ├── generate_title.py
+    ├── http_server.py
+    ├── model.py
+    ├── README.md
+    ├── requirements.txt
+    ├── runs
+    ├── templates
+    ├── test_gpt.py
+    ├── train.py
+    └── vocab
 ```
 
-
-
-- app.py	使用Flask包提供网络API
-- ReinforcedTextRank   使用知识增强改进的TextRank算法包 
-  - ReTextRankKeyword.py   预测关键词
-  - ReTextRankSeq.py   预测关键子序列
-  - Segmentation.py   子序列划分
-  - stopwords.txt   停用词
-  - tf-idf.json   关键词词频统计，用于知识增强
-  - util.py   工具
-
-- get_title.py   预测标题
-- get_abstract.py   预测摘要
-- test.py   测试算法效果(需要数据)
+部分重要文件和作用如下
+- back_end    项目后端
+  - app.py	使用flask 提供网络服务
+  - ReinforcedTextRank   使用知识增强改进后的TextRank算法实现
+- front_end   项目后端
+- train       GPT2模型训练代码
 
 
 
@@ -67,28 +90,6 @@ IntelliWriting 是一个基于改进版TextRank的智能写作工具，可以智
 
 ## 安装和使用
 
-### 必要条件
-
-我们的系统支持Windows 和 Linux 系统，但您必须满足以下要求：
-
-- python 3.7 +
-- Flask
-  - flask_wtf
-
-- Numpy
-- networkx
-
-
-
-### 可选条件
-
-如果您不需要运行测试程序 test.py，这两个包并不是必要条件
-
-- Pandas
-- tqdm
-
-### 具体步骤
-
 您可以按照以下步骤安装我们的系统：
 
 1.下载：
@@ -97,20 +98,20 @@ IntelliWriting 是一个基于改进版TextRank的智能写作工具，可以智
 git clone https://github.com/Patrick-CH/IntelliWriting.git
 ```
 
-2.安装必要的库 
+2.运行后端
 
 ```shell
-pip install flask
-pip install flask_wtf
-pip install numpy
-pip install networkx
+cd ./IntelliWriting/back_end
+sudo chmod u+x start_service.sh
+sudo ./start_service.sh
 ```
 
-3.运行我们的系统：
+3.运行前端
 
 ```shell
-cd IntelliWriting
-python3 app.py
+./IntelliWriting/front_end
+sudo chmod u+x start_service.sh
+sudo ./start_service.sh
 ```
 
 4.使用

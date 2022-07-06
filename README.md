@@ -14,35 +14,57 @@ Title prediction has always been an important task in the field of NLP. Accordin
 
 Project Structure
 
-```文件树
-├── app.py
-├── forms.py
-├── get_abstract.py
-├── get_title.py
+```file tree
+.
+├── back_end
+│   ├── app.py
+│   ├── forms.py
+│   ├── get_abstract.py
+│   ├── get_title.py
+│   ├── ReinforcedTextRank
+│   ├── requirements.txt
+│   ├── start_service.sh
+│   ├── static
+│   ├── templates
+│   └── test.py
+├── front_end
+│   ├── babel.config.js
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   ├── README.md
+│   ├── src
+│   └── vue.config.js
+├── README.md
+├── README_ZH.md
 ├── ReinforcedTextRank
-│   ├── __init__.py
-│   ├── ReTextRankKeyword.py
-│   ├── ReTextRankSeq.py
-│   ├── Segmentation.py
-│   ├── stopwords.txt
-│   ├── tf-idf.json
-│   └── util.py
-└── test.py
+└── train
+    ├── app.py
+    ├── config
+    ├── data_helper.py
+    ├── data_set.py
+    ├── generate_title.py
+    ├── http_server.py
+    ├── model.py
+    ├── README.md
+    ├── requirements.txt
+    ├── runs
+    ├── templates
+    ├── test_gpt.py
+    ├── train.py
+    └── vocab
 ```
 
+some important files and their functions are as follows
+- back_end    back end of the project
+  - app.py	Use Flask to provide Internet service
+  - ReinforcedTextRank   Improved TextRank algorithm package using knowledge enhancement
+- front_end   front end of the project
+- train       code to train the GPT2 model
 
-
-- app.py	Use Flask to provide Internet service
-- ReinforcedTextRank   Improved TextRank algorithm package using knowledge enhancement
-  - ReTextRankKeyword.py   predict keywords
-  - ReTextRankSeq.py   predict sub sequence
-  - Segmentation.py   segmentation for passage
-  - stopwords.txt   stop words
-  - tf-idf.json   TF-IDF data
-  - util.py   tools
-- get_title.py   predict the title
-- get_abstract.py   predict the abstract
-- test.py   test the result ( data required )
 
 
 
@@ -64,49 +86,28 @@ We use the news data from [Xuexiqinagguo](https://www.xuexi.cn/)：
 
 ## Install & Use
 
-### Requirements
+您可以按照以下步骤安装我们的系统：
 
-Our project supports Windows and Linux systems, but you must meet the following requirements:
-
-- python 3.7 +
-- Flask
-  - flask_wtf
-- Numpy
-- networkx
-
-
-
-### Optional
-
-These two packages are not required if you do not need to run the test program test.py
-
-- Pandas
-- tqdm
-
-### Tutorial
-
-You can install our system by following steps：
-
-1.downloads：
+1.download the code
 
 ```shell
 git clone https://github.com/Patrick-CH/IntelliWriting.git
 ```
 
-2.install required packages
+2.run the back end
 
 ```shell
-pip install flask
-pip install flask_wtf
-pip install numpy
-pip install networkx
+cd ./IntelliWriting/back_end
+sudo chmod u+x start_service.sh
+sudo ./start_service.sh
 ```
 
-3.run the system：
+3.run the front_end
 
 ```shell
-cd IntelliWriting
-python3 app.py
+./IntelliWriting/front_end
+sudo chmod u+x start_service.sh
+sudo ./start_service.sh
 ```
 
 4.use the API
