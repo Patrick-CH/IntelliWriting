@@ -16,9 +16,7 @@
               v-model="textarea">
             </el-input>
             <el-row>
-              <el-popconfirm
-                title="是否确认清除文本框内所有内容？"
-              >
+              <el-popconfirm title="是否确认清除文本框内所有内容？" @onConfirm="clear()">
                 <el-button slot="reference" type="warning" round plain icon="el-icon-delete-solid" style="margin-top:10px;margin-right:10px">
                   清空
                 </el-button>
@@ -29,7 +27,7 @@
               <el-button type="primary" round plain icon="el-icon-upload">导入Word</el-button>
             </el-row>
             <el-row style="margin-top:10px">
-              <el-button type="success" round plain icon="el-icon-s-opportunity" @click="success">获取标题</el-button>
+              <el-button type="success" round plain icon="el-icon-s-opportunity" @click="success">获取标题、摘要</el-button>
             </el-row>
           </el-col> 
           <el-col :span="12">
@@ -129,6 +127,10 @@
         });
         // window.console.log(this.value);
       },
+      clear(){
+        this.textarea = '';
+        window.console.log("clear!")
+      }
     }
   };
 </script>
