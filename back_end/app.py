@@ -3,6 +3,9 @@ from urllib.parse import urljoin, urlparse
 
 from flask import Flask, redirect, request, url_for, render_template
 from werkzeug.exceptions import HTTPException
+from werkzeug.utils import secure_filename
+from docx import Document
+
 from forms import PassageForm
 from get_title import get_title
 from get_abstract import get_abstract
@@ -49,6 +52,46 @@ def api_history():
         return {"history": history}
     else:
         raise HTTPException(404)
+
+
+@app.route('/api/file', methods=['POST'])
+def api_file():
+    file = request.files['file']
+    if file is None:# 表示没有发送文件
+        return { 'msg': "文件上传失败" }
+    else:
+        filename = secure_filename(file.filename)
+        save_path = os.path.join(os.path.dirname(__file__), "upload_file/")
+        doc_path = os.path.join(save_path, filename)
+        file.save(doc_path)
+        document = Document(doc_path)
+        text = ""
+        all_paragraphs = document.paragraphs
+        for paragraph in all_paragraphs:
+            for run in paragraph.runs:
+                text += run.text
+                print(run.text) 
+        return { "msg": "上传成功" , "context": text}
+
+
+@app.route('/api/ocr', methods=['POST'])
+def api_ocr():
+    file = request.files['file']
+    if file is None:# 表示没有发送文件
+        return { 'msg': "文件上传失败" }
+    else:
+        filename = secure_filename(file.filename)
+        save_path = os.path.join(os.path.dirname(__file__), "upload_file/")
+        doc_path = os.path.join(save_path, filename)
+        file.save(doc_path)
+        from cnocr import CnOcr
+        ocr = CnOcr()
+        res = ocr.ocr(doc_path)
+        text = ""
+        for c, s in res:
+            text += c
+        print("Predicted Chars:", res)
+        return { "msg": "上传成功" , "context": text}
 
 
 if __name__ == '__main__':

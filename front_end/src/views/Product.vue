@@ -21,13 +21,29 @@
                   清空
                 </el-button>
               </el-popconfirm>
-              <!-- OCR识别，Methods里加click事件 -->
-              <el-button type="primary" round plain icon="el-icon-camera-solid">OCR识别</el-button>
-              <!-- 导入Word，Methods里加click事件 -->
-              <el-button type="primary" round plain icon="el-icon-upload">导入Word</el-button>
+              <el-button type="success" round plain icon="el-icon-s-opportunity" @click="success">
+                获取标题、摘要
+              </el-button>
             </el-row>
             <el-row style="margin-top:10px">
-              <el-button type="success" round plain icon="el-icon-s-opportunity" @click="success">获取标题、摘要</el-button>
+              <!-- 导入Word -->
+              <el-upload
+                action="upload"
+                :http-request="handleUploadFile"
+                ref="upload"               
+                accept=".docx, .doc"
+                :show-file-list="false">
+                <el-button type="primary" round plain icon="el-icon-upload">导入Word</el-button>
+              </el-upload>
+              <!-- OCR识别 -->
+              <el-upload
+                action="upload"
+                :http-request="handleUploadFile1"
+                ref="upload"               
+                accept=".png, .jpg"
+                :show-file-list="false">
+                <el-button type="primary" round plain icon="el-icon-camera-solid">文字识别</el-button>
+              </el-upload>
             </el-row>
           </el-col> 
           <el-col :span="12">
@@ -103,7 +119,8 @@
         value: 6,
         sim1: '',
         sim2: '',
-        sim3: ''
+        sim3: '',
+        file: ''
       };
     },
     components: {
@@ -130,7 +147,31 @@
       clear(){
         this.textarea = '';
         window.console.log("clear!")
-      }
+      },
+      handleUploadFile (params) {
+        const that = this
+        const _file = params.file
+        var formData = new FormData();
+        formData.append("file", _file);
+        window.console.log(_file.name);
+        axios.post("api/api/file", formData).then(({ data: res }) => {
+          window.console.log(res.msg);
+          this.textarea = res.context;
+          this.success();
+        })
+      },
+       handleUploadFile1 (params) {
+        const that = this
+        const _file = params.file
+        var formData = new FormData();
+        formData.append("file", _file);
+        window.console.log(_file.name);
+        axios.post("api/api/ocr", formData).then(({ data: res }) => {
+          window.console.log(res.msg);
+          this.textarea = res.context;
+          this.success();
+        })
+      },
     }
   };
 </script>
