@@ -56,7 +56,7 @@
               </div>
             </router-link>
           </li>
-          <li class="entry5">
+          <li class="entry6">
             <router-link
               class="text-decoration"
               :to="{ name: 'home'}"
@@ -195,7 +195,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry1.jpg");
+    background: url("../assets/img/entry1.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -217,7 +217,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry2.jpg");
+    background: url("../assets/img/entry2.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -239,7 +239,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry3.jpg");
+    background: url("../assets/img/entry3.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -261,7 +261,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry4.jpg");
+    background: url("../assets/img/entry4.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -283,7 +283,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry5.jpg");
+    background: url("../assets/img/entry5.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -305,7 +305,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry6.jpg");
+    background: url("../assets/img/entry6.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
