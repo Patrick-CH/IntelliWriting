@@ -75,12 +75,14 @@
               border-color:#dcdfe6;
               background-color: #ffffff;
               padding: 10px;
-              height: 50px;
+              height: 80px;
               border-radius: 4px;
               overflow: auto">
                 <el-row style="margin-top:15px;">
                   <!-- 接受相似标题内容 -->
-                  <div style="width:400px; float: left">我是相似的标题</div>
+                  <div style="width:400px; float: left">{{sim1}}</div>
+                  <div style="width:400px; float: left">{{sim2}}</div>
+                  <div style="width:400px; float: left">{{sim3}}</div>
                 </el-row>
                 <!-- <el-divider></el-divider> -->
             </div>
@@ -94,14 +96,16 @@
 <script>
   import Banner from "../components/Banner";
   import axios from "axios";
-  // import Vue from "vue";
   export default {
     data() {
       return {
         textarea: '',
         title1: '', 
         abstract: '',
-        value: 6
+        value: 6,
+        sim1: '',
+        sim2: '',
+        sim3: ''
       };
     },
     components: {
@@ -109,18 +113,21 @@
     },
     methods: {
       success() {
-        this.$message({
-          message: '文章内容已上传成功，请耐心等待哦！',
-          type: 'success'
-        });
+        // this.$message({
+        //   message: '文章内容已上传成功，请耐心等待哦！',
+        //   type: 'success'
+        // });
         var formData = new FormData();
         formData.append('context', this.textarea);
         formData.append('num_sentence', this.value);
         axios.post("api/api/title", formData).then(({ data: res }) => {      
           this.title1 = res.title;
           this.abstract = res.abstract;
+          this.sim1 = res.sim_title[0].title
+          this.sim2 = res.sim_title[1].title
+          this.sim3 = res.sim_title[2].title
         });
-        window.console.log(this.value);
+        // window.console.log(this.value);
       },
     }
   };

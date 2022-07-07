@@ -6,27 +6,16 @@
         <div style="margin:20px"></div>
         <div class="content-nav-item">
           <div class="item-list" >
-            <p class="item-list-title">习近平回信勉励种粮大户 带动广大小农户多种粮种好粮 一起为国家粮食安全贡献力量</p>
-            <p class="item-list-content">新华社北京6月28日电 中共中央总书记、国家主席、中央军委主席习近平6月27日给安徽省太和县的种粮大户徐淙祥回信，向当地的乡亲们表示问候，对全国的种粮大户提出殷切期望。
-            习近平在回信中说，我记得你这个安徽太和的种粮能手。得知你家种植的小麦喜获丰收，儿孙也跟着你干起了农业，我感到很高兴。
-            习近平指出，手中有粮，心中不慌。对粮食生产，我一直都很关注，基层调研时也经常到田间地头看一看。这些年，党中央出台了一系列支持粮食生产的政策举措，就是要让中国人的饭碗牢牢端在自己手中，就是要让种粮农民有钱挣、得实惠，日子越过越好。
-            </p>
+            <p class="item-list-title">{{t1}}</p>
+            <p class="item-list-content">{{a1}}</p>
           </div>
           <div class="item-list">
-            <p class="item-list-title">习近平主持全球发展高层对话会并发表重要讲话</p>
-            <p class="item-list-content">新华社北京6月24日电 国家主席习近平24日晚在北京以视频方式主持全球发展高层对话会并发表重要讲话。阿尔及利
-              亚总统特本、阿根廷总统费尔南德斯、埃及总统塞西、印度尼西亚总统佐科、伊朗总统莱希、哈萨克斯坦总统托卡耶夫、俄罗斯总统普京、塞内加尔总统
-              萨勒、南非总统拉马福萨、乌兹别克斯坦总统米尔济约耶夫、巴西副总统莫朗、柬埔寨首相洪森、埃塞俄比亚总理阿比、斐济总理姆拜尼马拉马、印度总
-              理莫迪、马来西亚总理伊斯迈尔、泰国总理巴育出席。各国领导人围绕“构建新时代全球发展伙伴关系，携手落实2030年可持续发展议程”的主
-              题，就加强国际发展合作、加快落实联合国2030年可持续发展议程等重大问题深入交换意见，共商发展合作大计，达成广泛重要共识。            
-            </p>
+            <p class="item-list-title">{{t2}}</p>
+            <p class="item-list-content">{{a2}}</p>
           </div>
           <div class="item-list">
-            <p class="item-list-title">金砖国家领导人第十四次会晤举行 习近平主持会晤并发表重要讲话</p>
-            <p class="item-list-content">新华社北京6月23日电 国家主席习近平23日晚在北京以视频方式主持金砖国家领导人第十四次会晤。南非总统拉马福
-              萨、巴西总统博索纳罗、俄罗斯总统普京、印度总理莫迪出席。人民大会堂东大厅花团锦簇，金砖五国国旗整齐排列，与金砖标识交相辉映。
-              晚8时许，金砖五国领导人集体“云合影”，会晤开始。            
-            </p>
+            <p class="item-list-title">{{t3}}</p>
+            <p class="item-list-content">{{a3}}</p>
           </div>
         </div>
       </div>
@@ -36,10 +25,36 @@
 
 <script>
 import Banner from "../components/Banner";
+import axios from "axios"
 export default {
+  data() {
+    return {
+      t1: '',
+      t2: '',
+      t3: '',
+      a1: '',
+      a2: '',
+      a3: '',
+    };
+  },
+  mounted(){
+    var formData = new FormData();
+    formData.append('msg', "history");
+    axios.post("api/api/history", formData).then(({ data: res }) => {      
+      this.t1 = res.history[0].title;
+      this.a1 = res.history[0].title;
+      this.t2 = res.history[1].title;
+      this.a2 = res.history[1].title;
+      this.t3 = res.history[2].title;
+      this.a3 = res.history[2].title;
+    });
+  },
   components: {
     Banner
   },
+  methods: {
+
+  }
 };
 </script>
 
