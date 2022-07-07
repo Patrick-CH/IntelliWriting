@@ -42,11 +42,11 @@ export default {
     formData.append('msg', "history");
     axios.post("api/api/history", formData).then(({ data: res }) => {      
       this.t1 = res.history[0].title;
-      this.a1 = res.history[0].title;
+      this.a1 = res.history[0].abstract;
       this.t2 = res.history[1].title;
-      this.a2 = res.history[1].title;
+      this.a2 = res.history[1].abstract;
       this.t3 = res.history[2].title;
-      this.a3 = res.history[2].title;
+      this.a3 = res.history[2].abstract;
     });
   },
   components: {
