@@ -305,7 +305,7 @@ export default {
     width: 330px;
     height: 230px;
     list-style: none;
-    background: url("../assets/img/entry5.jpg");
+    background: url("../assets/img/entry6.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
