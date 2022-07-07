@@ -154,7 +154,7 @@
         window.console.log("clear!")
       },
       handleUploadFile (params) {
-        const that = this
+        // const that = this
         const _file = params.file
         var formData = new FormData();
         formData.append("file", _file);
@@ -166,7 +166,7 @@
         })
       },
        handleUploadFile1 (params) {
-        const that = this
+        // const that = this
         const _file = params.file
         var formData = new FormData();
         formData.append("file", _file);
