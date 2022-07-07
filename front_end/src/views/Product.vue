@@ -57,17 +57,32 @@
               border-color:#dcdfe6;
               background-color: #ffffff;
               padding: 10px;
-              height: 195px;
+              height: 50px;
               border-radius: 4px;
               overflow: auto">
                 <el-row style="margin-top:15px;">
                   <!-- 接受标题内容 -->
                   <div style="width:400px; float: left" id="t1">{{ title1 }}</div>
                   <div style="float: left">
-                    <el-link type="primary" style="margin-left:10px">复制</el-link>
+                    <el-link type="primary" style="float:right">复制</el-link>
                   </div>
                 </el-row>
-                <el-divider></el-divider>
+                <!-- <el-divider></el-divider> -->
+            </div>
+            <h3 style="text-align:center;margin-top:15px;">相似标题</h3>
+            <div style="margin-top:10px;
+              border: 1px solid;
+              border-color:#dcdfe6;
+              background-color: #ffffff;
+              padding: 10px;
+              height: 50px;
+              border-radius: 4px;
+              overflow: auto">
+                <el-row style="margin-top:15px;">
+                  <!-- 接受相似标题内容 -->
+                  <div style="width:400px; float: left">我是相似的标题</div>
+                </el-row>
+                <!-- <el-divider></el-divider> -->
             </div>
           </el-col>
         </el-row>

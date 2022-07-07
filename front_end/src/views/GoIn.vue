@@ -1,7 +1,7 @@
 <template>
   <div class="go-in">
     <banner img="../assets/img/bgtop.jpg" title="使用说明" />
-    <div class="section" v-loading="loading">
+    <div class="section">
       <div class="section-content">
         <div class="content-summary">
           <div class="summary-left">
@@ -68,38 +68,6 @@ export default {
       dialogTitle: ""
     };
   },
-  mounted() {
-    this.$http
-      .all([
-        this.$http.get("Honor/GetHonorAll"),
-        this.$http.get("Enterprise/GetEnterpriseAll"),
-        this.$http.get(`Team/GetTeamAll`),
-        this.$http.get(`Course/GetCourseAll`)
-      ])
-      .then(
-        this.$http.spread(
-          (responseHonor, responseEnterprise, responseTeam, responseCourse) => {
-            this.honorList = responseHonor.data;
-            this.partnerImg = responseEnterprise.data;
-            this.teamItem = responseTeam.data;
-
-            var groupCount = Math.ceil(responseCourse.data.length / 2);
-            window.console.log(groupCount);
-            for (let i = 0; i < groupCount; i++) {
-              let img2 = [];
-              for (let j = 0; j < 2; j++) {
-                if (responseCourse.data.length - 1 >= i * 2 + j) {
-                  img2.push(responseCourse.data[i * 2 + j]);
-                }
-              }
-              this.courseList.push(img2);
-            }
-            window.console.log(this.courseList);
-            this.loading = false;
-          }
-        )
-      );
-  }
 };
 </script>
 

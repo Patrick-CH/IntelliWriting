@@ -32,13 +32,8 @@ Vue.config.productionTip = false
 
 //设置超时时间
 axios.defaults.timeout = 5000
-//设置api地址
-//全局定义axios
-// axios.defaults.baseURL = 'http://shkjgw.shkjem.com/api/'
-Vue.prototype.$http = axios
 
-// 图片服务器地址
-// Vue.prototype.imgserver = 'http://shkjgw.shkjem.com/'
+Vue.prototype.$http = axios
 
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
