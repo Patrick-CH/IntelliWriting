@@ -16,7 +16,7 @@
               v-model="textarea">
             </el-input>
             <el-row>
-              <el-popconfirm title="是否确认清除文本框内所有内容？" @onConfirm="clear()">
+              <el-popconfirm title="是否确认清除文本框内所有内容？" @confirm="clear()">
                 <el-button slot="reference" type="warning" round plain icon="el-icon-delete-solid" style="margin-top:10px;margin-right:10px">
                   清空
                 </el-button>
@@ -146,6 +146,11 @@
       },
       clear(){
         this.textarea = '';
+        this.abstract = '';
+        this.title1 = '';
+        this.sim1 = '';
+        this.sim2 = '';
+        this.sim3 = '';
         window.console.log("clear!")
       },
       handleUploadFile (params) {
