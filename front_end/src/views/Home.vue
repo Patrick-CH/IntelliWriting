@@ -190,7 +190,7 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   .entry1 {
-    border: #ffffff solid 1px;
+    // border: #ffffff solid 1px;
     border-radius: 10px;
     width: 330px;
     height: 230px;
@@ -212,7 +212,7 @@ export default {
     }
   }
   .entry2 {
-    border: #ffffff solid 0px;
+    // border: #ffffff solid 0px;
     border-radius: 10px;
     width: 330px;
     height: 230px;
@@ -234,7 +234,7 @@ export default {
     }
   }
   .entry3 {
-    border: #ffffff solid 1px;
+    // border: #ffffff solid 1px;
     border-radius: 10px;
     width: 330px;
     height: 230px;
@@ -256,7 +256,7 @@ export default {
     }
   }
   .entry4 {
-    border: #ffffff solid 1px;
+    // border: #ffffff solid 1px;
     border-radius: 10px;
     width: 330px;
     height: 230px;
@@ -278,7 +278,7 @@ export default {
     }
   }
   .entry5 {
-    border: #ffffff solid 1px;
+    // border: #ffffff solid 1px;
     border-radius: 10px;
     width: 330px;
     height: 230px;
@@ -300,7 +300,7 @@ export default {
     }
   }
   .entry6 {
-    border: #ffffff solid 1px;
+    // border: #ffffff solid 1px;
     border-radius: 10px;
     width: 330px;
     height: 230px;

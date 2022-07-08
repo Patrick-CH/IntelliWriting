@@ -5,10 +5,10 @@
       <div class="p-video">
         <el-row :gutter="40">
           <el-col :span="10">
-            <h3 style="text-align:center">原始文本</h3>
+            <h3 class="head">原始文本</h3>
             <el-input
               type="textarea"
-              :rows="20"
+              :rows="25"
               placeholder="请输入内容"
               maxlength="2000"
               show-word-limit
@@ -17,37 +17,37 @@
             </el-input>
             <el-row>
               <el-popconfirm title="是否确认清除文本框内所有内容？" @confirm="clear()">
-                <el-button slot="reference" type="warning" round plain icon="el-icon-delete-solid" style="margin-top:10px;margin-right:10px">
-                  清空
+                <el-button slot="reference" type="warning" plain icon="el-icon-delete-solid" style="margin-top:10px;">
+                  清空内容
                 </el-button>
               </el-popconfirm>
-              <el-button type="success" round plain icon="el-icon-s-opportunity" @click="success">
-                获取标题、摘要
-              </el-button>
-            </el-row>
-            <el-row style="margin-top:10px">
-              <!-- 导入Word -->
               <el-upload
                 action="upload"
                 :http-request="handleUploadFile"
-                ref="upload"               
+                ref="upload"
+                class="upload-demo"               
                 accept=".docx, .doc"
                 :show-file-list="false">
-                <el-button type="primary" round plain icon="el-icon-upload">导入Word</el-button>
+                <el-button type="primary" plain icon="el-icon-upload">导入Word</el-button>
               </el-upload>
-              <!-- OCR识别 -->
               <el-upload
                 action="upload"
                 :http-request="handleUploadFile1"
-                ref="upload"               
+                ref="upload"
+                class="upload-demo"               
                 accept=".png, .jpg"
                 :show-file-list="false">
-                <el-button type="primary" round plain icon="el-icon-camera-solid">文字识别</el-button>
+                <el-button type="primary" plain icon="el-icon-camera-solid">文字识别</el-button>
               </el-upload>
+            </el-row>
+            <el-row style="margin-top:10px">
+              <el-button type="success" plain icon="el-icon-s-opportunity" style="margin-left:227px" @click="success">
+                获取标题、摘要
+              </el-button>
             </el-row>
           </el-col> 
           <el-col :span="12">
-            <h3 style="text-align:center">生成摘要</h3>
+            <h3 class="head">生成摘要</h3>
             <template>
               <div>
                 <vue-slider
@@ -65,7 +65,7 @@
                 {{abstract}}
               </p>
             </div>
-            <h3 style="text-align:center">生成标题</h3>
+            <h3 class="head">生成标题</h3>
             <div style="margin-top:10px;
               border: 1px solid;
               border-color:#dcdfe6;
@@ -83,22 +83,29 @@
                 </el-row>
                 <!-- <el-divider></el-divider> -->
             </div>
-            <h3 style="text-align:center;margin-top:15px;">相似标题</h3>
+            <h3 class="head" style="margin-top:15px;">相似标题</h3>
             <div style="margin-top:10px;
               border: 1px solid;
               border-color:#dcdfe6;
               background-color: #ffffff;
               padding: 10px;
-              height: 80px;
+              height: 190px;
               border-radius: 4px;
               overflow: auto">
-                <el-row style="margin-top:15px;">
+                <el-col style="margin-top:15px;">
                   <!-- 接受相似标题内容 -->
-                  <div style="width:400px; float: left">{{sim1}}</div>
-                  <div style="width:400px; float: left">{{sim2}}</div>
-                  <div style="width:400px; float: left">{{sim3}}</div>
-                </el-row>
-                <!-- <el-divider></el-divider> -->
+                  <div style="height:20px">
+                    <div style="width:400px;">{{sim1}}</div>
+                  </div>
+                  <el-divider></el-divider>
+                  <div style="height:20px">
+                    <div style="width:400px;">{{sim2}}</div>
+                  </div>
+                  <el-divider></el-divider>
+                  <div style="height:20px">
+                    <div style="width:400px;">{{sim3}}</div>
+                  </div>
+                </el-col>
             </div>
           </el-col>
         </el-row>
@@ -211,5 +218,25 @@
 .eTitle {
   font-size: 30px;
   padding: 10px 0;
+}
+
+.el-upload {
+  display: inline;
+  text-align: center;
+  cursor: pointer;
+  outline: 0;
+}
+.upload-demo {
+  display: inline;
+  margin-left: 15px;
+}
+
+.head {
+  text-align:center;
+  font-family: "YouYuan";
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 10px;
+  // color: #fff;
 }
 </style>

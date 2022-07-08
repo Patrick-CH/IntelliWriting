@@ -65,12 +65,13 @@ export default {
 
   &-title {
     position: absolute;
-    color: #fff;
-    font-size: 45px;
+    color: #ffd04b;
+    font-size: 80px;
     font-weight: 400;
     line-height: 300px;
     text-align: center;
     width: 100%;
+    font-family:"STLiti";
   }
 }
 </style>
