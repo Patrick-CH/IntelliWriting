@@ -82,6 +82,8 @@ def api_ocr():
     else:
         filename = secure_filename(file.filename)
         save_path = os.path.join(os.path.dirname(__file__), "upload_file/")
+        if not os.path.exists(save_path):
+            os.mkdir(save_path)
         doc_path = os.path.join(save_path, filename)
         file.save(doc_path)
         from cnocr import CnOcr
