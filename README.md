@@ -110,7 +110,10 @@ sudo chmod u+x start_service.sh
 sudo ./start_service.sh
 ```
 
-4.use the API
+4.visit the web page
+open localhost:8080, you can see the page.
+
+5.use the API
 Call the API to get the test results, assuming app.py is running on localhost:9000.
 
 ```javascript

@@ -101,7 +101,7 @@ git clone https://github.com/Patrick-CH/IntelliWriting.git
 2.运行后端
 
 ```shell
-cd ./IntelliWriting/back_end
+cd IntelliWriting/back_end
 sudo chmod u+x start_service.sh
 sudo ./start_service.sh
 ```
@@ -109,12 +109,15 @@ sudo ./start_service.sh
 3.运行前端
 
 ```shell
-./IntelliWriting/front_end
+cd IntelliWriting/front_end
 sudo chmod u+x start_service.sh
 sudo ./start_service.sh
 ```
 
-4.使用
+4.使用网页端
+打开 localhost:8080，即可访问页面。
+
+5.使用API
 
 调用API，获取测试结果，假设 app.py 正在localhost:9000上运行，API使用示例代码如下:
 
