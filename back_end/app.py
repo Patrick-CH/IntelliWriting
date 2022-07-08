@@ -1,4 +1,6 @@
+import argparse
 import os
+from pkgutil import extend_path
 from urllib.parse import urljoin, urlparse
 
 from flask import Flask, redirect, request, url_for, render_template
@@ -10,6 +12,12 @@ from forms import PassageForm
 from get_title import get_title
 from get_abstract import get_abstract
 from get_sim import get_sim_title
+from generate_title import generate
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--use_gpt2', default=False, help="Use GPT2 model if set to True")
+args = parser.parse_args()
+USE_GPT2 = args.use_gpt2
 
 history = []
 
@@ -34,6 +42,9 @@ def api_title():
     context = request.form['context']
     num_sentence = int(request.form['num_sentence'])
     title = get_title(context)
+    if USE_GPT2:
+        extend_title = generate(title)
+        title += extend_title
     abstract = get_abstract(context, num_sentence)
 
     data = {'title': title, 'abstract': abstract, 'sim_title': get_sim_title(title)}
