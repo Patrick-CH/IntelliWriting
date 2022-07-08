@@ -4,7 +4,8 @@ pandas==1.4.2
 numpy==1.22.3 
 WTForms==3.0.1
 tqdm==4.46.0
-torch==1.11.0
 networkx==2.8.4
 cnocr==2.1.2.1
 python-docx==0.8.11
+torch==1.12.0
+transformers==4.20.1
