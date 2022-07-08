@@ -105,7 +105,7 @@ sudo ./start_service.sh
 3.run the front_end
 
 ```shell
-./IntelliWriting/front_end
+cd ./IntelliWriting/front_end
 sudo chmod u+x start_service.sh
 sudo ./start_service.sh
 ```
