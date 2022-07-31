@@ -1,9 +1,11 @@
 import argparse
+from fileinput import filename
+import io
 import os
 from pkgutil import extend_path
 from urllib.parse import urljoin, urlparse
 
-from flask import Flask, redirect, request, url_for, render_template
+from flask import Flask, make_response, redirect, request, send_file, send_from_directory, url_for, render_template
 from werkzeug.exceptions import HTTPException
 from werkzeug.utils import secure_filename
 from docx import Document
@@ -13,6 +15,7 @@ from get_title import get_title
 from get_abstract import get_abstract
 from get_sim import get_sim_title
 from generate_title import generate
+from get_w_cloud import generate_wcloud
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--use_gpt2', default=False, help="Use GPT2 model if set to True")
@@ -46,8 +49,9 @@ def api_title():
         extend_title = generate(title)
         title += extend_title
     abstract = get_abstract(context, num_sentence)
+    file_name = generate_wcloud(context)
 
-    data = {'title': title, 'abstract': abstract, 'sim_title': get_sim_title(title)}
+    data = {'title': title, 'abstract': abstract, 'sim_title': get_sim_title(title), 'pic': file_name}
     if len(history) < 3:
         history.append(data)
     else:
@@ -105,6 +109,18 @@ def api_ocr():
             text += c
         print("Predicted Chars:", res)
         return { "msg": "上传成功" , "context": text}
+
+
+@app.route("/api/wpic/<file_name>", methods=['GET'])
+def get_pic_file(file_name):
+    try:
+        return send_file(
+            f"wcloud_pics/{file_name}",
+            mimetype='image/png',
+            as_attachment=False
+        )
+    except Exception as e:
+        return f"文件读取异常{e}"
 
 
 if __name__ == '__main__':

@@ -18,8 +18,6 @@ from transformers import BertTokenizer
 import torch.nn.functional as F
 import copy
 
-import torch_tensorrt
-
 
 def set_args():
     """设置模型预测所需参数"""

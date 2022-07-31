@@ -76,7 +76,9 @@
               overflow: auto">
                 <el-row style="margin-top:15px;">
                   <!-- 接受标题内容 -->
-                  <div style="width:400px; float: left" id="t1">{{ title1 }}</div>
+                  <div style="width:400px; float: left" id="t1">
+                    <h3>{{ title1 }}</h3>
+                  </div>
                   <div style="float: left">
                     <el-link type="primary" style="float:right">复制</el-link>
                   </div>
@@ -109,6 +111,11 @@
             </div>
           </el-col>
         </el-row>
+        <el-row style="margin-left:160px;margin-top:50px;">
+          <div class="img">
+            <img :src="imgUrl" alt="" srcset="" />
+          </div>
+        </el-row>
       </div>
     </div>
   </div>
@@ -127,7 +134,8 @@
         sim1: '',
         sim2: '',
         sim3: '',
-        file: ''
+        file: '',
+        imgUrl:''
       };
     },
     components: {
@@ -148,6 +156,7 @@
           this.sim1 = res.sim_title[0].title
           this.sim2 = res.sim_title[1].title
           this.sim3 = res.sim_title[2].title
+          this.imgUrl = "/api/api/wpic/" + res.pic
         });
         // window.console.log(this.value);
       },
