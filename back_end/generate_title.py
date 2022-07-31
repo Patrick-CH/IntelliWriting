@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
-# @project: GPT2-NewsTitle
+# @project: IntelliWriting
 # @filename: generate_title.py
-# @author: 刘聪NLP
-# @contact: logcongcong@gmail.com
-# @time: 2020/12/16 16:29
+# @author: Patrick-CH
+# @contact: yukechen_patrick@foxmail.com
+# @time: 2022/6/1
+# @reference: https://github.com/liucongg/GPT2-NewsTitle
 """
     文件说明：
     根据训练好的模型，进行新闻标题生成，预测文件
@@ -16,6 +17,8 @@ from model import GPT2LMHeadModel
 from transformers import BertTokenizer
 import torch.nn.functional as F
 import copy
+
+import torch_tensorrt
 
 
 def set_args():
@@ -180,4 +183,12 @@ def generate(input_text):
 
 
 if __name__ == '__main__':
-    pass
+    generate("自从佩洛西再度放出计划窜访台湾后，中方就已经很明确的向其发出了警告，\
+        这也导致美国政府内部也出现了一系列不同的声音，包括呼声颇高的反对意见。然而\
+        此时的共和党却抓住时机，不断刺激佩洛西，部分共和党成员甚至叫嚣此访失败“中\
+        国就赢了”。在这种刺激与施压下，佩洛西似乎已经打算将窜访进行到底，而为了能拉\
+        更多人下水，部分“对华鹰派”也成为了她的邀请对象。民主党众议员安娜·埃苏承认佩\
+        洛西邀请其同行据美国全国广播公司报道，佩洛西已经对美国国会众议院外事委员会副\
+        主席、共和党籍议员迈克尔·麦考尔，委员会主席、民主党籍议员格雷戈里·米克斯、\
+        民主党众议员安娜·埃苏发出邀请。然而这仨人中除米克斯尚未回应外，其余两人均拒\
+        绝了邀请，至于给出的理由也基本一致——不方便。")
