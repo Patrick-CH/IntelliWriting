@@ -3,8 +3,8 @@
     <banner img="../assets/img/bgtop.jpg" title="创作中心" />
     <div class="product-content" v-loading="loading">
       <div class="p-video">
-        <el-row :gutter="40">
-          <el-col :span="10">
+        <el-row :gutter="50">
+          <el-col :span="12">
             <h3 class="head">原始文本</h3>
             <el-input
               type="textarea"
@@ -17,7 +17,7 @@
             </el-input>
             <el-row>
               <el-popconfirm title="是否确认清除文本框内所有内容？" @confirm="clear()">
-                <el-button slot="reference" type="warning" plain icon="el-icon-delete-solid" style="margin-top:10px;">
+                <el-button slot="reference" type="warning" plain icon="el-icon-delete-solid" class="button1">
                   清空内容
                 </el-button>
               </el-popconfirm>
@@ -28,7 +28,7 @@
                 class="upload-demo"               
                 accept=".docx, .doc"
                 :show-file-list="false">
-                <el-button type="primary" plain icon="el-icon-upload">导入Word</el-button>
+                <el-button type="primary" plain icon="el-icon-upload" class="button2">导入Word</el-button>
               </el-upload>
               <el-upload
                 action="upload"
@@ -37,12 +37,10 @@
                 class="upload-demo"               
                 accept=".png, .jpg"
                 :show-file-list="false">
-                <el-button type="primary" plain icon="el-icon-camera-solid">文字识别</el-button>
+                <el-button type="primary" plain icon="el-icon-camera-solid" class="button2">文字识别</el-button>
               </el-upload>
-            </el-row>
-            <el-row style="margin-top:10px">
-              <el-button type="success" plain icon="el-icon-s-opportunity" style="margin-left:227px" @click="success">
-                获取标题、摘要
+              <el-button type="success" plain icon="el-icon-s-opportunity" class="button3" @click="success">
+                获取
               </el-button>
             </el-row>
           </el-col> 
@@ -76,9 +74,7 @@
               overflow: auto">
                 <el-row style="margin-top:15px;">
                   <!-- 接受标题内容 -->
-                  <div style="width:400px; float: left" id="t1">
-                    <h3>{{ title1 }}</h3>
-                  </div>
+                  <div style="width:400px; float: left" id="t1">{{ title1 }}</div>
                   <div style="float: left">
                     <el-link type="primary" style="float:right">复制</el-link>
                   </div>
@@ -111,8 +107,8 @@
             </div>
           </el-col>
         </el-row>
-        <el-row style="margin-left:-20px;margin-top:5px;">
-          <div style="margin-left:60px">
+        <el-row style="margin-top:5px;">
+          <div style="margin-left:100px;">
             <img :src="imgUrl" alt="" srcset="" />
           </div>
         </el-row>
@@ -156,7 +152,6 @@
           this.sim1 = res.sim_title[0].title
           this.sim2 = res.sim_title[1].title
           this.sim3 = res.sim_title[2].title
-          this.imgUrl = "/api/api/wpic/" + res.pic
         });
         // window.console.log(this.value);
       },
@@ -237,7 +232,24 @@
 }
 .upload-demo {
   display: inline;
-  margin-left: 15px;
+  margin-left: 10px;
+}
+
+.button1 {
+  width: 118px;
+  margin-top: 10px;
+}
+
+.button2 {
+  margin-top: 10px;
+  margin-left: 0px;
+  width: 118px;
+}
+
+.button3 {
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 90px;
 }
 
 .head {
