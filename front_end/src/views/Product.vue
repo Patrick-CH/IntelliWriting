@@ -143,16 +143,19 @@
         //   message: '文章内容已上传成功，请耐心等待哦！',
         //   type: 'success'
         // });
-        var formData = new FormData();
-        formData.append('context', this.textarea);
-        formData.append('num_sentence', this.value);
-        axios.post("api/api/title", formData).then(({ data: res }) => {      
-          this.title1 = res.title;
-          this.abstract = res.abstract;
-          this.sim1 = res.sim_title[0].title
-          this.sim2 = res.sim_title[1].title
-          this.sim3 = res.sim_title[2].title
-        });
+        if (this.textarea.length > 0){
+          var formData = new FormData();
+          formData.append('context', this.textarea);
+          formData.append('num_sentence', this.value);
+          axios.post("api/api/title", formData).then(({ data: res }) => {      
+            this.title1 = res.title;
+            this.abstract = res.abstract;
+            this.sim1 = res.sim_title[0].title
+            this.sim2 = res.sim_title[1].title
+            this.sim3 = res.sim_title[2].title
+            this.imgUrl = "/api/api/wpic/" + res.pic
+          });
+        }
         // window.console.log(this.value);
       },
       clear(){
