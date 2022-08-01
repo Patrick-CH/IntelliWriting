@@ -16,7 +16,7 @@ def generate_wcloud(text: str):
 
     w.to_file(f"wcloud_pics/{file_name}")
     img = Image.open(f"wcloud_pics/{file_name}")
-    new_img = Image.blend(img, Image.open("mask.jpg"), 0.5)
+    new_img = Image.blend(img, Image.open("mask.jpg"), 0.3)
     new_img.save(f"wcloud_pics/{file_name}")
     return file_name
 

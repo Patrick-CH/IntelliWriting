@@ -111,8 +111,8 @@
             </div>
           </el-col>
         </el-row>
-        <el-row style="margin-left:160px;margin-top:50px;">
-          <div class="img">
+        <el-row style="margin-left:-20px;margin-top:5px;">
+          <div style="margin-left:60px">
             <img :src="imgUrl" alt="" srcset="" />
           </div>
         </el-row>
