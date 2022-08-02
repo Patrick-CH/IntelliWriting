@@ -8,7 +8,7 @@
             <h3 class="head">原始文本</h3>
             <el-input
               type="textarea"
-              :rows="25"
+              :rows="28"
               placeholder="请输入内容"
               maxlength="2000"
               show-word-limit
@@ -74,7 +74,9 @@
               overflow: auto">
                 <el-row style="margin-top:15px;">
                   <!-- 接受标题内容 -->
-                  <div style="width:400px; float: left" id="t1">{{ title1 }}</div>
+                  <div style="width:400px; float: left" id="t1">
+                    <h3>{{ title1 }}</h3>
+                  </div>
                   <div style="float: left">
                     <el-link type="primary" style="float:right">复制</el-link>
                   </div>
