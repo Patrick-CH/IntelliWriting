@@ -109,10 +109,15 @@
             </div>
           </el-col>
         </el-row>
+        <!-- 接受词云 -->
         <el-row style="margin-top:5px;">
           <div style="margin-left:100px;">
             <img :src="imgUrl" alt="" srcset="" />
           </div>
+        </el-row>
+        <!-- 接受计时结果 -->
+        <el-row style="margin-top:5px;">
+          <p>{{time_consumption_text}}</p>
         </el-row>
       </div>
     </div>
@@ -133,7 +138,8 @@
         sim2: '',
         sim3: '',
         file: '',
-        imgUrl:''
+        imgUrl:'',
+        time_consumption_text:''
       };
     },
     components: {
@@ -146,19 +152,24 @@
         //   type: 'success'
         // });
         if (this.textarea.length > 0){
+          var start = new Date();
           var formData = new FormData();
           formData.append('context', this.textarea);
           formData.append('num_sentence', this.value);
-          axios.post("api/api/title", formData).then(({ data: res }) => {      
+          axios.post("api/api/title", formData).then(({ data: res }) => {    
+            // 根据返回更新页面  
             this.title1 = res.title;
             this.abstract = res.abstract;
             this.sim1 = res.sim_title[0].title
             this.sim2 = res.sim_title[1].title
             this.sim3 = res.sim_title[2].title
             this.imgUrl = "/api/api/wpic/" + res.pic
+            // 计算时间
+            var end = new Date();
+            var time_comsumption = end.getTime() - start.getTime();
+            this.time_consumption_text = `本次预测消耗时间为:  ${time_comsumption/1000.0} S`;
           });
         }
-        // window.console.log(this.value);
       },
       clear(){
         this.textarea = '';
@@ -167,6 +178,7 @@
         this.sim1 = '';
         this.sim2 = '';
         this.sim3 = '';
+        this.time_consumption_text = '';
         window.console.log("clear!")
       },
       handleUploadFile (params) {
@@ -174,7 +186,6 @@
         const _file = params.file
         var formData = new FormData();
         formData.append("file", _file);
-        window.console.log(_file.name);
         axios.post("api/api/file", formData).then(({ data: res }) => {
           window.console.log(res.msg);
           this.textarea = res.context;
@@ -186,7 +197,6 @@
         const _file = params.file
         var formData = new FormData();
         formData.append("file", _file);
-        window.console.log(_file.name);
         axios.post("api/api/ocr", formData).then(({ data: res }) => {
           window.console.log(res.msg);
           this.textarea = res.context;
