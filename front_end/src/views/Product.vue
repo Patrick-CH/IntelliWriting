@@ -178,6 +178,7 @@
         this.sim1 = '';
         this.sim2 = '';
         this.sim3 = '';
+        this.imgUrl = '';
         this.time_consumption_text = '';
         window.console.log("clear!")
       },
