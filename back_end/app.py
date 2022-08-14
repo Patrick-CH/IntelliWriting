@@ -44,12 +44,14 @@ def index():
 def api_title():
     context = request.form['context']
     num_sentence = int(request.form['num_sentence'])
+    use_wordcloud = True if 'use_wordcloud' in request.form else False
     title = get_title(context)
     if USE_GPT2:
         extend_title = generate(title)
         title += extend_title
     abstract = get_abstract(context, num_sentence)
-    file_name = generate_wcloud(context)
+    if use_wordcloud:
+        file_name = generate_wcloud(context)
 
     data = {'title': title, 'abstract': abstract, 'sim_title': get_sim_title(title), 'pic': file_name}
     if len(history) < 3:
