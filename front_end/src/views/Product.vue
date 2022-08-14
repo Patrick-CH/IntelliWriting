@@ -161,10 +161,12 @@
             // 根据返回更新页面  
             this.title1 = res.title;
             this.abstract = res.abstract;
-            this.sim1 = res.sim_title[0].title
-            this.sim2 = res.sim_title[1].title
-            this.sim3 = res.sim_title[2].title
-            this.imgUrl = "/api/api/wpic/" + res.pic
+            this.sim1 = res.sim_title[0].title;
+            this.sim2 = res.sim_title[1].title;
+            this.sim3 = res.sim_title[2].title;
+            if (res.pic.length > 0){
+              this.imgUrl = "/api/api/wpic/" + res.pic;
+            }
             // 计算时间
             var end = new Date();
             var time_comsumption = end.getTime() - start.getTime();

@@ -50,6 +50,7 @@ def api_title():
         extend_title = generate(title)
         title += extend_title
     abstract = get_abstract(context, num_sentence)
+    file_name = ''
     if use_wordcloud:
         file_name = generate_wcloud(context)
 
