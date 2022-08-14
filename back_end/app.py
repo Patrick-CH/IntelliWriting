@@ -85,7 +85,6 @@ def api_file():
         for paragraph in all_paragraphs:
             for run in paragraph.runs:
                 text += run.text
-                print(run.text) 
         return { "msg": "上传成功" , "context": text}
 
 
@@ -107,7 +106,6 @@ def api_ocr():
         text = ""
         for c, s in res:
             text += c
-        print("Predicted Chars:", res)
         return { "msg": "上传成功" , "context": text}
 
 
