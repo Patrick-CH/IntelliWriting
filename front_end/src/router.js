@@ -30,6 +30,11 @@ let airouter = new Router({
       component: () => import('./views/GoIn.vue')
     },
     {
+      path: '/users',
+      name: 'users',
+      component: () => import('./views/UserCenter.vue')
+    },
+    {
       path: '/contactus',
       name: 'contactus',
       component: () => import('./views/Download.vue')

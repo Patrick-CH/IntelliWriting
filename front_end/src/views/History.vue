@@ -5,21 +5,40 @@
       <div class="news-section-content">
         <div style="margin:20px"></div>
         <div class="content-nav-item">
-          <div class="item-list" >
-            <p class="item-list-title">{{t1}}</p>
-            <p class="item-list-content">{{a1}}</p>
-          </div>
-          <div class="item-list">
-            <p class="item-list-title">{{t2}}</p>
-            <p class="item-list-content">{{a2}}</p>
-          </div>
-          <div class="item-list">
-            <p class="item-list-title">{{t3}}</p>
-            <p class="item-list-content">{{a3}}</p>
+          <div class="item-list" v-for='(p, index) in history'>
+            <a @click="detailBtn(p)"> 
+              <p class="item-list-title">{{p.title}}</p>
+            </a>
+            <p class="item-list-content">{{p.abstract}}</p>
           </div>
         </div>
       </div>
     </div>
+    <!-- detail ref="msgBtn"></detail -->
+    <el-dialog :visible.sync="examineBtn"
+            width="1000px">
+    <el-form label-width="130px"
+              class="item">
+        <div class="invoice">
+            <div class="title">文章详情</div>
+            <el-form-item label="文章标题">{{ title }}</el-form-item>
+            <el-form-item label="文章摘要">
+              <textarea v-model="abstract" class="abs_style"
+                style="border: 1px solid;border-color:#dcdfe6;padding: 10px;border-radius: 4px;overflow: auto;margin-bottom:10px"/>
+            </el-form-item>
+            <el-form-item label="文章内容">
+              <textarea v-model="content" class="content_style"
+                style="border: 1px solid;border-color:#dcdfe6;padding: 10px;border-radius: 4px;overflow: auto;margin-bottom:10px"/>            
+            </el-form-item>
+            <!-- 接受词云 -->   
+            <el-form-item style="margin-top:5px;">
+              <div style="margin-left:-100px;">
+                <img :src="imgUrl" alt="" srcset="" />
+              </div>
+            </el-form-item>
+        </div>
+    </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -29,31 +48,43 @@ import axios from "axios"
 export default {
   data() {
     return {
-      t1: '',
-      t2: '',
-      t3: '',
-      a1: '',
-      a2: '',
-      a3: '',
+      history: [],
+      examineBtn: false,
+      title: '',
+      abstract: '',
+      content: '',
+      imgUrl: ''
     };
   },
   mounted(){
-    var formData = new FormData();
-    formData.append('msg', "history");
-    axios.post("api/api/history", formData).then(({ data: res }) => {      
-      this.t1 = res.history[0].title;
-      this.a1 = res.history[0].abstract;
-      this.t2 = res.history[1].title;
-      this.a2 = res.history[1].abstract;
-      this.t3 = res.history[2].title;
-      this.a3 = res.history[2].abstract;
-    });
+    var current_user = localStorage.getItem("current_user");
+    if(current_user != null){
+      var formData = new FormData();
+      formData.append('msg', "history");
+      formData.append('user', current_user);
+      axios.post("api/api/history", formData).then(({ data: res }) => {      
+        this.history = res.history;
+      });
+    } else {
+      this.$message({        
+        message: '请先登录',
+        type: 'failure'
+      });
+    }
   },
   components: {
     Banner
   },
-  methods: {
-
+  methods: {    
+    detailBtn(p) {
+      window.console.log("查看详情");    
+      this.examineBtn = true;
+      this.title = p.title;
+      this.abstract = p.abstract;
+      this.content = p.content;
+      this.imgUrl = "/api/api/wpic/" + p.img;
+      window.console.log(this.imgUrl);
+    }, 
   }
 };
 </script>
@@ -211,5 +242,36 @@ export default {
   .text-decoration {
     text-decoration: none;
   }
+}
+
+.item .title {
+  color: #841816;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 10px 0;
+  margin-left: 60px;
+}
+ 
+.invoice {
+  width: 450px;
+  display: inline-block;
+  vertical-align: top;
+}
+.item .el-form-item__label {
+    color: #000 !important;
+    font-weight: 700 !important;
+}
+
+.abs_style{
+  width: 600px;
+  height: 100px;
+  font-size: 14px;
+  font-family: SimHei;
+}
+.content_style{
+  width: 600px;
+  height: 600px;
+  font-size: 14px;
+  font-family: SimHei;
 }
 </style>

@@ -6,6 +6,7 @@ from pkgutil import extend_path
 from urllib.parse import urljoin, urlparse
 
 from flask import Flask, make_response, redirect, request, send_file, send_from_directory, url_for, render_template
+import sqlalchemy
 from werkzeug.exceptions import HTTPException
 from werkzeug.utils import secure_filename
 from docx import Document
@@ -16,6 +17,11 @@ from get_abstract import get_abstract
 from get_sim import get_sim_title
 from generate_title import generate
 from get_w_cloud import generate_wcloud
+
+from db_connection.database import engine
+from db_connection.models import users, User, passages, Passage
+from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--use_gpt2', default=False, help="Use GPT2 model if set to True")
@@ -55,19 +61,32 @@ def api_title():
         file_name = generate_wcloud(context)
 
     data = {'title': title, 'abstract': abstract, 'sim_title': get_sim_title(title), 'pic': file_name}
-    if len(history) < 3:
-        history.append(data)
-    else:
-        history.pop(0)
-        history.append(data)
+
+    # 保存历史记录
+    if 'user' in request.form:
+        username = request.form['user']
+        p = Passage(title, abstract, context, username, file_name)
+        with Session(engine) as session:
+            session.add_all([p])
+            session.commit()
     return data
 
 
 @app.route('/api/history', methods=['POST'])
 def api_history():
     msg = request.form['msg']
+    session = Session(engine)
     if msg == "history":
-        return {"history": history}
+        if "user" in request.form:
+            username = request.form['user']
+            stmt = select(User).where(User.name == username)
+            try:
+                u = session.scalars(stmt).one()
+                sql = select(Passage).where(Passage.username == username)
+                p_list = session.scalars(sql).all()
+                return {"history": [i.to_dict() for i in p_list]}
+            except sqlalchemy.exc.NoResultFound:
+                raise HTTPException(404)
     else:
         raise HTTPException(404)
 
@@ -122,6 +141,40 @@ def get_pic_file(file_name):
         )
     except Exception as e:
         return f"文件读取异常{e}"
+
+
+@app.route("/users/login", methods=['POST'])
+def user_login():
+    name = request.form['name']
+    passwd = request.form['passwd']
+    session = Session(engine)
+    stmt = select(User).where(User.name == name)
+    try:
+        u = session.scalars(stmt).one()
+        if u.passwd == passwd:
+            return {"success": True}
+        else:
+            return {"success": False}
+    except sqlalchemy.exc.NoResultFound:
+        return {"success": False}
+
+
+@app.route("/users/register", methods=['POST'])
+def user_register():
+    name = request.form['name']
+    passwd = request.form['passwd']
+    email = request.form['email']
+    session = Session(engine)
+    stmt = select(User).where(User.name == name)
+    try:
+        u = session.scalars(stmt).one()
+        return {"success": False}
+    except sqlalchemy.exc.NoResultFound:
+        with Session(engine) as session:
+            u = User(name=name, email=email, passwd=passwd)
+            session.add_all([u])
+            session.commit()
+        return {"success": True}
 
 
 if __name__ == '__main__':

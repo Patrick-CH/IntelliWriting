@@ -42,8 +42,9 @@ export default {
   },
   methods: {
     success() {
-      this.$message({
-        message: '您的意见已收到，我们会认真阅读，感谢您的来信！',
+      var user = localStorage.getItem("current_user");
+      this.$message({        
+        message: user + '您的意见已收到，我们会认真阅读，感谢您的来信！',
         type: 'success'
       });
     },

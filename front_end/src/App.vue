@@ -19,6 +19,7 @@
           <el-menu-item index="/product">创作中心</el-menu-item>
           <el-menu-item index="/history">历史记录</el-menu-item>
           <el-menu-item index="/intro">使用说明</el-menu-item>
+          <el-menu-item index="/users">用户中心</el-menu-item>
           <el-menu-item index="/contactus">联系我们</el-menu-item>
         </el-menu>
       </el-header>

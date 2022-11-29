@@ -157,6 +157,12 @@
           formData.append('context', this.textarea);
           formData.append('num_sentence', this.value);
           formData.append('use_wordcloud', 'True');
+          
+          var user = localStorage.getItem('current_user');
+          if (user != null){
+            formData.append('user', user);
+          }
+          
           axios.post("api/api/title", formData).then(({ data: res }) => {    
             // 根据返回更新页面  
             this.title1 = res.title;
