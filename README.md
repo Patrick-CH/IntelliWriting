@@ -86,7 +86,7 @@ We use the news data from [Xuexiqinagguo](https://www.xuexi.cn/)：
 
 ## Install & Use
 
-您可以按照以下步骤安装我们的系统：
+You can install through following steps:
 
 1.download the code
 
